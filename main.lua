@@ -1,8 +1,9 @@
 require("mesa")
+require("bocha")
 
 --baranda = {}
 --baranda2 = {}
-bocha = {}
+-- -- bocha = {}
 
 entidad1 = nil
 entidad2 = nil
@@ -23,11 +24,11 @@ end
                   
 function love.load()
     love.physics.setMeter(64)
-    world = love.physics.newWorld(0, 9.81 * 64, true)
+    world = love.physics.newWorld(0, 0, true)
 
     -- Se definen las funciones de callback para detectar colisiones
     world:setCallbacks(iniciarContacto, terminarContacto)
-
+                           
 
     --los parametros de cuerpo significan:
     --tipo de cuerpo, posicion x, posicion y
@@ -40,12 +41,7 @@ function love.load()
     --cuerpo, forma
 
     CrearMesa()
-
-    bocha.cuerpo = love.physics.newBody(world, 650/2, 650/2, "dynamic")
-    bocha.forma = love.physics.newCircleShape(20)   
-    bocha.acople = love.physics.newFixture(bocha.cuerpo, bocha.forma)
-    bocha.acople:setUserData("Bocha")
-    bocha.sprite = love.graphics.newImage("bola.png")
+    CargarBochas()
 
     love.window.setMode(650, 650)
 end
@@ -61,8 +57,15 @@ end
 --"isrepeat" sirve para detectar si la tecla esta 
 --siendo presionada de manera continua, o si se presiono una sola vez
 function love.keypressed(key,scancode,isrepeat)
-    if key == "space" and contacto then
-        bocha.cuerpo:applyLinearImpulse(0, -1000)
+    if key == "space" then
+        miBocha.cuerpo:applyLinearImpulse(0, -1000)
+    end
+end
+
+
+function love.mousepressed(x, y, button, istouch, presses)
+    if button == 1 then
+        MoverBocha(x, y)
     end
 end
 
@@ -74,16 +77,8 @@ end
 
 function love.draw()
     DibujarMesa()
+    DibujarBochas()
 
-    love.graphics.setColor(1,1,1) --Para que los sprites se vean con sus colores originales
-    love.graphics.draw( bocha.sprite,
-                        bocha.cuerpo:getX(),
-                        bocha.cuerpo:getY(),
-                        0,
-                        0.075,
-                        0.075,
-                        256,
-                        256)
                         
     love.graphics.setColor(1,0,0)
     if contacto then
