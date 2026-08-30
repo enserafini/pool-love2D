@@ -18,8 +18,7 @@ function terminarContacto(a,b,col)
     entidad1 = nil
     entidad2 = nil
 end
-
-
+                  
 function love.load()
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81 * 64, true)
