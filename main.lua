@@ -24,11 +24,11 @@ end
                   
 function love.load()
     love.physics.setMeter(64)
-    world = love.physics.newWorld(0, 9.81 * 64, true)
+    world = love.physics.newWorld(0, 0, true)
 
     -- Se definen las funciones de callback para detectar colisiones
     world:setCallbacks(iniciarContacto, terminarContacto)
-
+                           
 
     --los parametros de cuerpo significan:
     --tipo de cuerpo, posicion x, posicion y
@@ -58,13 +58,17 @@ end
 --siendo presionada de manera continua, o si se presiono una sola vez
 function love.keypressed(key,scancode,isrepeat)
     if key == "space" then
-        bochas[1].cuerpo:applyLinearImpulse(0, -1000)
-        bochas[2].cuerpo:applyLinearImpulse(-1000, -1000)
-        bochas[3].cuerpo:applyLinearImpulse(1000, -1000)
-        bochas[4].cuerpo:applyLinearImpulse(1000, -1000)
-        bochas[5].cuerpo:applyLinearImpulse(1000, 0)
+        miBocha.cuerpo:applyLinearImpulse(0, -1000)
     end
 end
+
+
+function love.mousepressed(x, y, button, istouch, presses)
+    if button == 1 then
+        MoverBocha(x, y)
+    end
+end
+
 
 
 function love.update(dt)
