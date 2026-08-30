@@ -2,6 +2,12 @@ mesa = {}
 local tag = "Baranda"
 
 function CrearMesa()
+
+    mesa.b1 = {}
+    mesa.b2 = {}
+    mesa.b3 = {}
+    mesa.b4 = {}
+
     mesa.b1.cuerpo = love.physics.newBody(world, 650/2, 650-25)
     mesa.b1.forma = love.physics.newRectangleShape(650, 50)
     mesa.b1.acople = love.physics.newFixture(mesa.b1.cuerpo, mesa.b1.forma)
