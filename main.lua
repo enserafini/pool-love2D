@@ -1,5 +1,7 @@
-baranda = {}
-baranda2 = {}
+require("mesa")
+
+--baranda = {}
+--baranda2 = {}
 bocha = {}
 
 entidad1 = nil
@@ -18,8 +20,7 @@ function terminarContacto(a,b,col)
     entidad1 = nil
     entidad2 = nil
 end
-
-
+                  
 function love.load()
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 9.81 * 64, true)
@@ -38,16 +39,7 @@ function love.load()
     --los parametros de acople significan:
     --cuerpo, forma
 
-    baranda.cuerpo = love.physics.newBody(world, 650/2, 650-25)
-    baranda.forma = love.physics.newRectangleShape(650, 50)
-    baranda.acople = love.physics.newFixture(baranda.cuerpo, baranda.forma)
-    baranda.acople:setUserData("Baranda")
-    
-    baranda2.cuerpo = love.physics.newBody(world, 650/2, 25)
-    baranda2.forma = love.physics.newRectangleShape(650, 50)
-    baranda2.acople = love.physics.newFixture(baranda2.cuerpo, baranda2.forma)
-    baranda2.acople:setUserData("Baranda")
-
+    CrearMesa()
 
     bocha.cuerpo = love.physics.newBody(world, 650/2, 650/2, "dynamic")
     bocha.forma = love.physics.newCircleShape(20)   
@@ -81,9 +73,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setColor(0.6,0.4,0.2)
-    love.graphics.polygon("fill", baranda.cuerpo:getWorldPoints(baranda.forma:getPoints()))
-    love.graphics.polygon("fill", baranda2.cuerpo:getWorldPoints(baranda2.forma:getPoints()))
+    DibujarMesa()
 
     love.graphics.setColor(1,1,1) --Para que los sprites se vean con sus colores originales
     love.graphics.draw( bocha.sprite,
